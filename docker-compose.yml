@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  httpd:
+    image: httpd:latest
+    volumes:
+      - ./webroot:/usr/local/apache2/htdocs/
+      - ./node_modules:/usr/local/apache2/htdocs/node_modules
+    ports:
+      - "80:80"
+  npm:
+    image: treyjones/npm:latest
+    volumes:
+      - ./:/npm
+  tsc:
+    image: treyjones/tsc:latest
+    volumes:
+      - ./:/tsc
