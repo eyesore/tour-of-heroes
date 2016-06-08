@@ -1,4 +1,3 @@
 .DS_Store
-node_modules
 webroot/script/*
 !webroot/script/systemjs.config.js
