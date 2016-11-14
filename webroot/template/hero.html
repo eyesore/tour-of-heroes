@@ -8,5 +8,5 @@
 </ul>
 <div *ngIf='selectedHero'>
     <h2>{{selectedHero.name | uppercase}} is my hero</h2>
-    <button (click)='gotoDetail()'>View Details</button>
+    <button [routerLink]="['/detail', selectedHero.id]">View Details</button>
 </div>

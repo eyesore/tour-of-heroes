@@ -1,24 +1,29 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { RouteParams } from '@angular/router-deprecated';
 import {HeroService} from '../service/hero.service';
 import {Hero} from '../class/hero';
+import {ActivatedRoute, Params} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
     selector: 'my-hero-detail',
-    templateUrl: 'template/hero-detail.component.html',
-    styleUrls: ['style/hero-detail.component.css'],
+    templateUrl: '/template/hero-detail.component.html',
+    styleUrls: ['/style/hero-detail.component.css'],
 })
 export class HeroDetailComponent implements OnInit {
     constructor(
-        private routeParams: RouteParams,
-        private heroService: HeroService) {    }
+        private heroService: HeroService,
+        private route: ActivatedRoute,
+        private location: Location
+    ) {    }
     hero: Hero;
     ngOnInit() {
-        let id = +this.routeParams.get('id');
-        this.heroService.getHero(id).
+        this.route.params.forEach((params: Params) => {
+            let id = +params['id'];
+            this.heroService.getHero(id).
             then(hero => this.hero = hero);
+        });
     }
     goBack() {
-        window.history.back();
+        this.location.back();
     }
 }

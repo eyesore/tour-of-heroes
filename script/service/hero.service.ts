@@ -4,11 +4,11 @@ import { HEROES } from '../data/mock-heroes';
 
 @Injectable()
 export class HeroService {
-    getHeroes() {
+    getHeroes(): Promise<Hero[]> {
         return Promise.resolve(HEROES);
     }
     getHero(id: Number) {
-        return Promise.resolve(HEROES).
+        return this.getHeroes().
             then(heroes => heroes.filter(hero => hero.id === id)[0]);
     }
     // See the "Take it slow" appendix
